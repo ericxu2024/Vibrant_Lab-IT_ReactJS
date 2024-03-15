@@ -49,7 +49,6 @@ Your submission will be evaluated based on the following criteria:
 This assessment provides an opportunity to demonstrate your skills in React.js development and showcases your ability to create interactive web applications with complex functionality. Take your time to thoroughly understand the requirements and implement a solution that reflects your capabilities as a React.js developer.
 
 ## Resources
-You can use the provided array for your content of the table or you can create your own data for it.
 
 ```javascript
 const employeesData = [
