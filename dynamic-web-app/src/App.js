@@ -6,7 +6,7 @@ import './App.css';
 // test
 
 const App = () => {
-  const employeesData = [
+  const [employeesData, setEmployeesData] = useState([
     { 
       id: 1, 
       name: 'John Doe', 
@@ -52,7 +52,7 @@ const App = () => {
       salary: 65000, 
       experience: 3 
     }
-  ];
+  ]);
 
   // use a React Hook for state management, in this case the current text in the search bar
   const [searchQuery, setSearchQuery] = useState('');
@@ -62,6 +62,36 @@ const App = () => {
     setSearchQuery(query);
   };
 
+  // state management for adding a row
+  const [formData, setFormData] = useState({
+    name: '',
+    position: '',
+    department: '',
+    age: '',
+    salary: '',
+    experience: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newEmployee = { id: employeesData.length + 1, ...formData };
+    setEmployeesData([...employeesData, newEmployee]);
+    setFormData({
+      name: '',
+      position: '',
+      department: '',
+      age: '',
+      salary: '',
+      experience: ''
+    });
+  };
+
+  
   const filteredData = employeesData.filter((employee) => {
     const employeeValues = Object.values(employee);
 
@@ -82,8 +112,15 @@ const App = () => {
   return (
     <div className="App">
       <h1>Employee Table</h1>
+      
       <SearchBar onSearch={handleSearch}/>
-      <TableContent data={filteredData} />
+      <TableContent 
+        data={filteredData} 
+        formData={formData}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+      />
+      
     </div>
   );
 }
